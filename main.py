@@ -1,5 +1,4 @@
 import json
-import re
 import tkinter
 import tkinter.filedialog
 import tkinter.scrolledtext
@@ -22,19 +21,6 @@ def filename(path: str):
     return str_cache
 
 
-def unification(path:str):
-    data = ''
-    reg = "\"[a-zA-Z]\": \"describe\", "
-    with open(path, 'r', encoding='utf-8') as fp:
-        data = fp.read()
-    data = re.sub(reg, "", data, 5)
-    data = data.replace("{\"", "{\n    \"", 1)
-    data = data.replace("\", ", "\",\n    ")
-    data = data.replace("\"}", "\"\n}")
-    with open(path, 'w', encoding='utf-8') as fp:
-        fp.write(data)
-
-
 def spawnDict(path_origin: str, path_translate: str):
     path_dict = './source_file/dict/' + filename(path_origin) + '_dict.json'
     Dict = dict.fromkeys('origin', 'translate')
@@ -48,7 +34,7 @@ def spawnDict(path_origin: str, path_translate: str):
     with open(path_dict, 'w', encoding='utf-8') as fp:
         json.dump(Dict, fp, ensure_ascii=False)
     unification(path_dict)
-    print("Spawn Dict successfully!\nDict at "+path_dict)
+    print("Spawn Dict successfully!\nDict at " + path_dict)
 
 
 def TranslateOrigin(path_origin: str):
@@ -74,14 +60,11 @@ def TranslateOrigin(path_origin: str):
         else:
             translated_all.setdefault(key, original_data.get(key))
     with open(path_translated, 'w', encoding='utf-8') as fp:
-        json.dump(translated_data, fp, ensure_ascii=False)
-    unification(path_translated)
+        json.dump(translated_data, fp, ensure_ascii=False,indent=4)
     with open(path_neededTranslated, 'w', encoding='utf-8') as fp:
-        json.dump(neededTranslated_data, fp, ensure_ascii=False)
-    unification(path_neededTranslated)
+        json.dump(neededTranslated_data, fp, ensure_ascii=False,indent=4)
     with open(path_all, 'w', encoding='utf-8') as fp:
-        json.dump(translated_all, fp, ensure_ascii=False)
-    unification(path_all)
+        json.dump(translated_all, fp, ensure_ascii=False,indent=4)
 
 
 app = tkinter.Tk()
