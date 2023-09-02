@@ -12,7 +12,7 @@ def mkDir(root: str, relativePath: str):
 
 
 def spawnDict(originPath: str, translatePath: str):
-    savaPath = os.path.abspath('source_file/dict')
+    savaPath = os.path.abspath('resource/dict')
 
     if os.path.exists(savaPath):
         if os.path.exists(os.path.join(savaPath, 'bak')):
@@ -52,8 +52,8 @@ def spawnDict(originPath: str, translatePath: str):
 
 
 def translate(folderPath: str, outputPath: str):
-    compareDictPath = os.path.abspath('source_file/dict')
-    needTranslatePath = os.path.abspath('source_file/output')
+    compareDictPath = os.path.abspath('resource/dict')
+    needTranslatePath = os.path.abspath('resource/output')
 
     if os.path.exists(needTranslatePath):
         shutil.rmtree(needTranslatePath)

@@ -1,6 +1,6 @@
 import sys
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QLocale, QTranslator
 from PySide6.QtWidgets import QApplication
 
 from libs.window import Window
@@ -13,6 +13,10 @@ if __name__ == '__main__':
     # setTheme(Theme.DARK)
 
     app = QApplication(sys.argv)
+
+    translator = QTranslator()
+    app.installTranslator(translator)
+
     w = Window()
     w.show()
     app.exec_()
